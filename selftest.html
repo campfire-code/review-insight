@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="UTF-8" /><title>自检（开发用）</title></head>
+<body><pre id="out">running</pre><script type="module">
+import { encode } from '/src/tool/index.ts';
+const c = document.createElement('canvas'); c.width = 4000; c.height = 3000;
+const g = c.getContext('2d'); g.fillStyle = 'rgba(200,80,40,0.6)'; g.fillRect(0, 0, 4000, 3000);
+const png = new Uint8Array(await (await new Promise((r) => c.toBlob(r, 'image/png'))).arrayBuffer());
+const res = [];
+for (const f of ['jpg', 'webp', 'png']) {
+  const { data, w, h } = await encode(png, f, 80, 1920, '#FFFFFF');
+  const head = Array.from(data.slice(0, 4)).map((b) => b.toString(16).padStart(2, '0')).join('');
+  res.push(`${f} ${w}x${h} ${data.length}B magic=${head}`);
+}
+try { await encode(new Uint8Array([1, 2, 3]), 'jpg', 80, 0, '#fff'); res.push('broken: no error'); } catch (e) { res.push('broken: ' + e.message); }
+document.getElementById('out').textContent = res.join('\n');
+</script></body></html>
