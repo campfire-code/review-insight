@@ -2,12 +2,13 @@
   "id": "e20",
   "slug": "review-insight",
   "name": "差评归因分析",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "repo": "campfire-code/review-insight",
   "license": "MIT",
   "ui": {
-    "layout": "b",
-    "palette": "teal"
+    "layout": "a",
+    "palette": "teal",
+    "accent": "#D37017"
   },
   "upstream": null
 }

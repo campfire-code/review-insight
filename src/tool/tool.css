@@ -1,0 +1,32 @@
+/* 差评归因分析：占比条 + 高频问题排行。类名以 ri- 开头，只用 kit.css 的变量。 */
+.ri-body { display: grid; gap: 12px; }
+.ri-head { margin: 0; }
+.ri-nums { display: flex; gap: 28px; flex-wrap: wrap; }
+.ri-nums > div { display: grid; line-height: 1.15; }
+.ri-nums b { font-size: 2.1em; color: var(--primary); }
+.ri-nums span { color: var(--muted); font-size: .92em; }
+.ri-bar { display: flex; height: 14px; gap: 2px; border-radius: 7px; overflow: hidden; }
+.ri-bar i { min-width: 4px; }
+.ri-cats { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 16px; }
+.ri-cats li { display: inline-flex; align-items: center; gap: 6px; }
+.ri-cats li i { width: 10px; height: 10px; border-radius: 3px; flex: none; }
+.ri-cats small { color: var(--muted); }
+.ri-top { list-style: none; margin: 0; padding: 10px 0 0; border-top: 1px solid var(--line); display: grid; gap: 6px; }
+.ri-top li { display: grid; grid-template-columns: 22px minmax(7em, 11em) 1fr 2.4em; align-items: center; gap: 10px; min-height: 28px; }
+.ri-rank { width: 22px; height: 22px; border-radius: 6px; display: grid; place-items: center; background: var(--chip); color: var(--muted); font-size: .88em; font-weight: 600; }
+.ri-top li:nth-child(-n+3) .ri-rank { background: var(--primary); color: var(--on-primary); }
+.ri-issue { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500; }
+.ri-track { height: 8px; border-radius: 4px; background: var(--chip); overflow: hidden; }
+.ri-track i { display: block; height: 100%; border-radius: 4px; background: var(--primary); transition: width .2s var(--ease); }
+.ri-top b { text-align: right; }
+.ri-note { margin: 0; color: var(--muted); font-size: .92em; }
+.ri-empty { display: grid; justify-items: center; gap: 8px; padding: 22px 18px 10px; text-align: center; }
+.ri-empty svg { width: min(400px, 100%); }
+.ri-empty .ri-h { margin: 6px 0 0; font-size: 1.35em; font-weight: 700; }
+.ri-empty p { margin: 0; max-width: 46ch; color: var(--muted); line-height: 1.6; }
+.ri-empty p.ri-fmt { margin: 4px 0 0; max-width: none; display: inline-flex; white-space: nowrap; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 999px; background: var(--chip); color: var(--muted); font-size: .92em; line-height: 1.5; }
+.ri-empty.hover .ri-fmt { background: var(--primary-soft); color: var(--primary); }
+.ri-s-doc rect:first-child { fill: var(--surface); stroke: var(--line-strong); stroke-width: 1.5; }
+.ri-s-line { fill: var(--chip); }
+.ri-s-star { fill: var(--err); }
+.ri-s-ar { fill: none; stroke: var(--primary); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }

@@ -1,5 +1,6 @@
 // 工具声明：差评归因分析
 import { MessageSquareWarning as MessageSquareWarningAsIcon } from 'lucide-react';
+import { createElement } from 'react';
 import type { BatchTool, RunContext } from '../kit/types';
 import { baseName, cellText, errText, guessColumn, isFatalLlmError, mapPool, resolveColumn, safeName, toTable } from './common';
 import {
@@ -7,6 +8,7 @@ import {
   parseRating, parseSuggestReply, pct, reportSheets, shouldAnalyze, summarize, type Detail, type Judged, type Review, type Scope,
 } from './core';
 import { readSheets, writeXlsx } from './xlsx';
+import { InsightBody, InsightEmpty } from './Insight';
 
 const COMMENT_KEYWORDS = [/^(评论|评价)(内容)?$/, /评论内容|评价内容|追评|买家评论|买家评价/, /评论|评价|留言/, /^内容$/, /comment|review|content/i];
 const RATING_KEYWORDS = [/评分|星级|打分|分数|评级|满意度/, /^(星|分)$/, /score|rating|star/i, /好评|差评/];
@@ -44,12 +46,14 @@ async function judgeBatch(batch: Review[], categories: string[], known: string[]
 const tool: BatchTool = {
   id: 'e20',
   name: '差评归因分析',
-  tagline: '导入评论导出表，AI 把差评、中评归到质量、物流、描述不符等类别，写出每条原因，汇总占比、高频问题 TOP10 和改进建议，导出 Excel 报告。',
+  tagline: '导入评论导出表，大模型把差评、中评归到质量、物流、描述不符等类别，写出每条原因，汇总占比、高频问题前十 和改进建议，导出 Excel 报告。',
   icon: MessageSquareWarningAsIcon,
   category: '电商运营',
   type: 'data',
   mode: 'batch',
-  resultView: 'table',
+  resultView: 'text',
+  Empty: InsightEmpty,
+  ResultBody: ({ result }) => createElement(InsightBody, { result }),
   columns: [['total', '评论'], ['analyzed', '差/中评'], ['calls', '调用次数'], ['top', '最多的问题']],
   needsLLM: true,
   concurrency: 1,

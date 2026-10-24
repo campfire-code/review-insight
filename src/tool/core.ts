@@ -215,7 +215,7 @@ export function reportSheets(details: Detail[], s: Summary, suggestions: { probl
   title(['问题类别', '条数', '占比']);
   for (const c of s.categories) rows.push([c.name, c.count, pct(c.ratio)]);
   rows.push([]);
-  title(['高频问题 TOP10', '次数', '所属类别', '典型评论']);
+  title(['高频问题前十', '次数', '所属类别', '典型评论']);
   s.top.forEach((x) => rows.push([x.issue, x.count, x.category, x.example]));
   rows.push([]);
   title(['改进建议', '针对的问题']);
