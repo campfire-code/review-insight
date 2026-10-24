@@ -13,7 +13,7 @@ function fakeCtx(files: Map<string, Uint8Array>, params: Params, llm: Llm): RunC
     writeText: async (p, t) => void files.set(p, new TextEncoder().encode(t)),
     mkdir: async () => {},
     join: async (...parts) => parts.join('/'),
-    llm, sidecar: async () => '',
+    llm, sidecar: async () => '', ffmpeg: async () => {}, duration: async () => 0,
   };
 }
 const defaults = (over: Params): Params => ({ ...Object.fromEntries(tool.params.map((f) => [f.key, f.default])), ...over });

@@ -31,10 +31,13 @@ let loaded: Promise<Settings> | null = null;
 const listeners = new Set<Listener>();
 
 export function loadSettings() {
-  return (loaded ??= settingsStore().then(async (st) => {
-    current = { ...DEFAULTS, llm: { ...DEFAULTS.llm, ...((await st.get<LlmConfig>('llm')) ?? {}) }, theme: (await st.get<ThemePref>('theme')) ?? 'system' };
-    return current;
-  }));
+  return (loaded ??= settingsStore()
+    .then(async (st) => {
+      current = { ...DEFAULTS, llm: { ...DEFAULTS.llm, ...((await st.get<LlmConfig>('llm')) ?? {}) }, theme: (await st.get<ThemePref>('theme')) ?? 'system' };
+      return current;
+    })
+    // 设置文件读不到（例如浏览器预览）时用默认值，不让界面报错
+    .catch(() => current));
 }
 
 export async function saveSettings(patch: Partial<Settings>) {
